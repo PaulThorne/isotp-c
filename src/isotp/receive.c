@@ -31,8 +31,11 @@ bool isotp_send_flow_control_frame(IsoTpShims* shims, IsoTpMessage* message) {
         shims->log("Unable to set PCI in CAN data");
         return false;
     }
+    can_data[2] = 0x20;
+    can_data[1] = 0x08;
+    message->size = 2;
 
-    shims->send_can_message(message->arbitration_id - ARBITRATION_ID_OFFSET, can_data,
+    shims->send_can_message(message->arbitration_id, can_data,
             shims->frame_padding ? 8 : 1 + message->size);
     return true;
 }

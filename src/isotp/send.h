@@ -24,6 +24,7 @@ extern "C" {
 typedef struct {
     bool completed;
     bool success;
+    IsoTpMessage message;
 
     // Private
     uint16_t sending_arbitration_id;
@@ -53,7 +54,7 @@ typedef struct {
  * multi-frame messages. The 'completed' field in the returned IsoTpSendHandle
  * will be true when the message is completely sent.
  */
-IsoTpSendHandle isotp_send(IsoTpShims* shims, const uint16_t arbitration_id,
+IsoTpSendHandle isotp_send(IsoTpShims* shims, const uint32_t arbitration_id,
         const uint8_t payload[], uint16_t size,
         IsoTpMessageSentHandler callback);
 
@@ -76,8 +77,12 @@ IsoTpSendHandle isotp_send(IsoTpShims* shims, const uint16_t arbitration_id,
  *      it was successful.
  */
 bool isotp_continue_send(IsoTpShims* shims, IsoTpSendHandle* handle,
-        const uint16_t arbitration_id, const uint8_t data[],
-        const uint8_t size);
+        const uint32_t arbitration_id, const uint8_t data[],
+        const uint16_t size);
+
+// Used to send rest of can frames after receivig flow control frame
+bool isotp_send_second_frame(IsoTpShims* shims, uint16_t frame_count, uint8_t num_frames,
+        const uint32_t arbitration_id, const uint8_t payload[],const uint16_t size);
 
 #ifdef __cplusplus
 }
