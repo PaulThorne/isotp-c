@@ -21,7 +21,7 @@
 // TODO we want to avoid malloc, and we can't be allocated 4K on the stack for
 // each IsoTpMessage, so for now we're setting an artificial max message size
 // here - for most multi-frame use cases, 256 bytes is plenty.
-#define OUR_MAX_ISO_TP_MESSAGE_SIZE 513
+#define OUR_MAX_ISO_TP_MESSAGE_SIZE 4096
 
 /* Private: IsoTp nibble specifics for PCI and Payload.
  */
@@ -58,7 +58,7 @@ extern "C" {
 typedef struct {
     uint32_t arbitration_id;
     uint8_t payload[OUR_MAX_ISO_TP_MESSAGE_SIZE];
-    uint16_t size;
+    uint32_t size;
     bool completed;
     bool multi_frame;
 } IsoTpMessage;

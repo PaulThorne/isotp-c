@@ -81,7 +81,7 @@ bool isotp_continue_send(IsoTpShims* shims, IsoTpSendHandle* handle,
         const uint16_t size);
 
 // Used to send rest of can frames after receivig flow control frame
-bool isotp_send_second_frame(IsoTpShims* shims, uint16_t frame_count, uint8_t num_frames,
+bool isotp_send_second_frame(IsoTpShims* shims, uint16_t frame_count, uint16_t num_frames,
         const uint32_t arbitration_id, const uint8_t payload[],const uint16_t size);
 
 #ifdef __cplusplus
