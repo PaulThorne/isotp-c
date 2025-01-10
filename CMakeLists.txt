@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(isotp LANGUAGES C)
 
+include(AddGitSubmodule.cmake)
+
 # Define the source files
 set(ISOTP_SOURCES 
 	${CMAKE_CURRENT_SOURCE_DIR}/src/isotp/allocate.c
@@ -15,7 +17,7 @@ set(COMMON_INCLUDE_ISOTP
     ${CMAKE_CURRENT_SOURCE_DIR}/src/isotp
 )
 
-add_subdirectory("deps/bitfield-c")
+add_git_submodule("deps/bitfield-c")
 
 # Add the UDS library as a static library
 add_library(isotp STATIC ${ISOTP_SOURCES})
