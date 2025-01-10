@@ -15,7 +15,7 @@ set(COMMON_INCLUDE_ISOTP
     ${CMAKE_CURRENT_SOURCE_DIR}/src/isotp
 )
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/deps/bitfield-c)
+add_subdirectory("deps/bitfield-c")
 
 # Add the UDS library as a static library
 add_library(isotp STATIC ${ISOTP_SOURCES})
